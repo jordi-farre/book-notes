@@ -67,3 +67,87 @@ The key lesson to be drawn here, though, is that the JDBC specification allows j
 Ultimately, it’s just fantasy to expect every single bug like this one to be driven out. Bugs will happen. They cannot be eliminated, so they must be survived instead.
 
 Inside every enterprise today is a mesh of interconnected, interdependent systems. They cannot—must not—allow bugs to cause a chain of failures
+
+## Chapter 3
+
+### Stabilize your system
+
+Things happen in the real world that just don't happen in the lab -usually bad things-
+
+When building the architecture,
+design, and even low-level implementation of a system, many decision points
+have high leverage over the system’s ultimate stability.
+
+The amazing thing is that the highly stable design usually costs
+the same to implement as the unstable one.
+
+### Defining stability
+
+A transaction is an
+abstract unit of work processed by the system.
+
+The word system means the complete, interdependent set of hardware,
+applications, and services required to process transactions for users
+
+A robust system keeps processing transactions.
+
+An impulse
+is a rapid shock to the system. An impulse to the system is when something
+whacks it with a hammer. In contrast, stress to the system is a force applied
+to the system over an extended period.
+
+### Extending your life span
+
+The major dangers to your system’s longevity are memory leaks and data
+growth.
+
+Following Murphy’s Law,
+whatever you do not test against will happen.
+
+The only way you can catch them
+before they bite you in production is to run your own longevity tests.
+
+If all else fails, production becomes your longevity testing environment by
+default. You’ll definitely find the bugs there
+
+> Maybe if you have good monitoring and alerting systems, you can detect and fix these bugs very quickly and you can avoid to have this long running tests in development.
+
+### Failure modes
+
+Once you accept that failures will happen, you have the ability to design
+your system’s reaction to specific failures. You can create safe failure modes that contain the damage and protect the rest of the system.
+
+### Stopping crack propagation
+
+The pool
+could have been configured to create more connections if it was exhausted.
+It also could have been configured to block callers for a limited time, instead
+of blocking forever when all connections were checked out.
+
+The client could have been written to set a timeout on the RMI sockets.
+
+the CF servers themselves could have been partitioned
+into more than one service group.
+
+The more tightly coupled the architecture, the greater the
+chance this coding error can propagate.
+
+### Chain of failure
+
+If you tried to estimate
+the probability of that exact chain of events occurring, it would look incredibly improbable.
+
+- Fault A condition that creates an incorrect internal state in your software.
+
+- Error Visibly incorrect behavior.
+
+- Failure An unresponsive system.
+
+One way to prepare for every possible failure is to look at every external call,
+every I/O, every use of resources, and every expected outcome and ask, “What
+are all the ways this can go wrong?”
+
+Faults will happen; they can never
+be completely prevented. And we must keep faults from becoming errors.
+
+
