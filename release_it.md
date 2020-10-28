@@ -150,4 +150,153 @@ are all the ways this can go wrong?”
 Faults will happen; they can never
 be completely prevented. And we must keep faults from becoming errors.
 
+## Chapter 4
+
+### Stability Antipatterns
+
+As we integrate the world, tightly coupled systems are the rule rather than the exception.
+
+High interactive complexity arises when systems have enough moving parts
+and hidden, internal dependencies that most operators’ mental models are
+either incomplete or just plain wrong.
+
+the operator’s instinctive actions will have results ranging from
+ineffective to actively harmful.
+
+Tight coupling allows cracks in one part of the system to propagate themselves
+—or multiply themselves—across layer or system boundaries.
+
+### Integration Points
+
+A butterfly has
+a central system with a lot of feeds and connections fanning into it on one
+side and a large fan out on the other side
+
+Some people would call this a monolith, but that has negative connotations.
+It might be a nicely factored system that just has a lot of responsibility.
+
+The other style is the spiderweb, with many boxes and dependencies.
+
+the more we move toward a large number
+of smaller services, the more we integrate with SaaS providers, and the more
+we go API first, the worse this is going to get.
+
+> Microservices architecture is antipattern?
+
+### Socket based protocols
+
+is that it can take a long time to discover
+that you can’t connect.
+
+a slow response is a lot worse than no response.
+
+### The 5AM problem
+
+Whether for a problem diagnosis or performance tuning, packet capture tools
+are the only way to understand what’s really happening on the network.
+
+> I used this once, to diagnose a problem with SSL connections done from an external server to our API. It was really useful, but a desperate measure in my case.
+
+not every problem can be solved at the level of
+abstraction where it manifests
+
+### HTTP Protocols
+
+all HTTP-based protocols use sockets, so they are vulnerable to
+all of the problems described previously, but adds its own set of issues.
+
+The provider may accept the TCP connection but never respond to the
+HTTP request.
+
+The provider may accept the connection but not read the request.
+
+The provider may send back a response status the caller doesn’t know
+how to handle.
+
+The provider may send back a response with a content type the caller
+doesn’t expect or know how to handle,
+
+The provider may claim to be sending JSON but actually sending plain
+text.
+
+### Vendor API libraries
+
+It would be nice to think that enterprise software vendors must have hardened
+their software against bugs, but it's rarely true for their client libraries.
+
+The worst part about these libraries is that you have so little control over
+them.
+
+> Some payment providers offered us client libraries, but we preferred to use directly their REST API, to have more control.
+
+> We don't know the insides of the library and in case of error will be difficult to know what's happening.
+
+### Chain Reactions
+
+A chain reaction occurs when an application has some defect—usually a
+resource leak or a load-related crash.
+
+### Cascading failures
+
+A cascading failure occurs when a crack in one layer
+triggers a crack in a calling layer.
+
+Every dependency is a chance for a failure to cascade.
+
+Crucial services with a high fan-in—meaning ones with many callers—spread
+their problems widely, so they are worth extra scrutiny.
+
+### Users
+
+Users are a terrible thing
+
+> lol XD
+
+### Traffic
+
+How does your system react to excessive demand?
+
+then autoscaling is your friend. But beware!
+It’s not hard to run up a huge bill by autoscaling buggy applications.
+
+> How we know when to scale up? By CPU metrics?
+
+### Heap memory
+
+Your best bet is to keep as little in the in-memory session as possible.
+
+Weak references are a useful way to respond to changing memory conditions,
+but they do add complexity. When you can, it’s best to just keep things out
+of the session.
+
+### Off-Heap memory, Off-Host Memory
+
+Memcached or Redis, for example.
+
+### Expensive to Serve
+
+There is no effective defense against expensive users. They are not a direct
+stability risk, but the increased stress they produce increases the likelihood
+of triggering cracks elsewhere in the system.
+
+The best thing you can do about expensive users is test aggressively. Load tests with more proportion than expected.
+
+### Unwanted users
+
+An entire parasitic industry exists by consuming resources from other com-
+panies’ websites. Collectively known as competitive intelligence companies,
+
+Once you identify a screen scraper, block it from your
+network.
+
+Write some terms of use for your site that say
+users can view content only for personal or noncommercial purposes. Then,
+when the screen scrapers start hitting your site, sic the lawyers on them.
+
+### Malicious users
+
+Truly talented crackers who can analyze your defenses, develop a customized
+attack, and infiltrate your systems without being spotted are blessedly rare.
+This is the so-called “advanced persistent threat.”
+
 
