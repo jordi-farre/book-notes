@@ -299,4 +299,102 @@ Truly talented crackers who can analyze your defenses, develop a customized
 attack, and infiltrate your systems without being spotted are blessedly rare.
 This is the so-called “advanced persistent threat.”
 
+### Blocked threads
+
+Here’s the catch
+about interpreted languages, though. The interpreter can be running, and
+the application can still be totally deadlocked, doing nothing useful.
+
+Multithreading is complex
+
+> Some languages provide an Actor model as a promise of a better multithread management I think.
+
+A mock client somewhere (not in the same data center) can run synthetic
+transactions on a regular basis. That client experiences the same view of the
+system that real users experience.
+
+> Maybe a little portion of e2eTests running on an schedule in production?
+
+If you find yourself synchronizing methods on your domain objects, you
+should probably rethink the design
+
+“Command Query Responsibility Separation,” and
+it nicely avoids a large number of concurrency issues.
+
+### Spot the blocking
+
+When misused, however, caching can create new problems.
+
+### Libraries
+
+Libraries are notorious sources of blocking threads, whether they are open-
+source packages or vendor code
+
+> In an opensource library you can propose improvements.
+
+### Self-Denial attacks
+
+Good marketing can kill you at any time
+
+### Avoiding Self-Denial
+
+You can avoid machine-induced self-denial by building a “shared-nothing”
+architecture.
+
+> I think this is difficult, because applications so many times have something shared between differents instances, like databases.
+
+“pre-autoscale” by upping the configuration before the marketing
+event goes out.
+
+> In my previous work they did this before a black friday.
+
+> I think autoscaling should be fast enough if your applications have a low startup time.
+
+### Scaling effects
+
+Because the development and test
+environments rarely replicate production sizing, it can be hard to see where
+scaling effects will bite you.
+
+### Point-to-point communications
+
+Publish/subscribe messaging is better still, since a server can pick
+up a message even if it wasn’t listening at the precise moment the message
+was sent. Of course, publish/subscribe messaging often brings in some
+serious infrastructure cost. This is a great time to apply the XP principle that
+says, “Do the simplest thing that will work.”
+
+### Shared Resources
+
+When the shared resource gets overloaded, it’ll become a bottleneck limiting
+capacity
+
+### Unbalanced capacities
+
+The fact is that the front end
+always has the ability to overwhelm the back end, because their capacities
+are not balanced.
+
+### Drive Out Through Testing
+
+what can you do if your service serves such unpredictable callers? Be
+ready for anything.
+
+> Makes sense to test with a load that maybe you never will have?
+
+### Dogpile
+
+When a bunch of servers impose this transient load all at once, it’s called a
+dogpile.
+
+### Slow responses
+
+slow response, on the other hand, ties up resources in
+the calling system and the called system.
+
+You should give your system the ability to monitor its own performance
+
+### Unbounded Result Sets
+
+Design with skepticism, and you will achieve resilience
 
