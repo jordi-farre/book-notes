@@ -398,3 +398,29 @@ You should give your system the ability to monitor its own performance
 
 Design with skepticism, and you will achieve resilience
 
+## Chapter 5
+
+### Timeouts
+
+Every application must
+grapple with the fundamental nature of networks: networks are fallible
+
+Well-placed timeouts provide fault isolation
+
+Timeouts can also be relevant within a single service. Any resource pool can
+be exhausted.
+
+Also beware of language-level synchronization or mutexes. Always use the
+form that takes a timeout argument.
+
+Use a generic gateway to provide the template for connection handling,
+
+> Maybe using a framework like Spring provides you this kind of handling.
+
+fast retries are very likely to
+fail again.
+
+queuing the work for a slow retry later is a good thing,
+making the system more robust
+
+
