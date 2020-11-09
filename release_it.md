@@ -423,4 +423,31 @@ fail again.
 queuing the work for a slow retry later is a good thing,
 making the system more robust
 
+### Circuit Breaker
+
+When the circuit is “open,” calls to the circuit breaker fail immediately,
+without any attempt to execute the real operation.
+
+A circuit
+breaker may also have a “fallback” strategy.
+
+> I find difficult to have a fallback strategy for all the situations. When you use an external provider, maybe you don't have another alternative to do the fallback.
+
+Leaky Bucket pattern. It’s a simple counter that you can increment every
+time you observe a fault. In the background, a thread or timer decrements
+the counter periodically
+
+### Bulkheads
+
+Physical
+redundancy is the most common form of bulkheads
+
+mission-critical service might be implemented as sev-
+eral independent farms of servers,
+
+> AWS zones for example?
+
+Dynamic partitions can be made and
+destroyed as traffic patterns change.
+
 
