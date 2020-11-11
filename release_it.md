@@ -450,4 +450,36 @@ eral independent farms of servers,
 Dynamic partitions can be made and
 destroyed as traffic patterns change.
 
+### Steady State
+
+Every single time a human touches a server is an opportunity for unforced
+errors
+
+the system should be able to run at least one release cycle without human intervention.
+
+The Steady State pattern says that for every mechanism that accumulates a
+resource, some other mechanism must recycle that resource.
+
+### Data Purging
+
+Data purging is nasty, detail-oriented work. Referential integrity constraints
+in a relational database are half the battle. The other half of the battle is
+ensuring that applications still work once the data is gone.
+
+### Log Files
+
+Log file rotation requires just a few minutes of configuration.
+
+### In-Memory Caching
+
+Improper use of caching is the major cause of memory leaks
+
+### Fail Fast
+
+If the system can determine in advance that it will fail at an operation, it’s
+always better to fail fast.
+
+If any of the
+resources are not available, the service can fail immediately
+
 
