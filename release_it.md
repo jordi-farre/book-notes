@@ -482,4 +482,85 @@ always better to fail fast.
 If any of the
 resources are not available, the service can fail immediately
 
+### Let it crash
+
+Sometimes the best thing you can do to create system-level stability is to
+abandon component-level stability.
+
+There’s just no way to test everything or predict all the ways a system can
+break. We must assume that errors will happen.
+
+The cleanest state your program can ever have is right after startup. The “let
+it crash” approach says that error recovery is difficult and unreliable, so our
+goal should be to get back to that clean startup as rapidly as possible.
+
+#### Limited granularity
+
+We want to crash a component
+in isolation. The rest of the system must protect itself from a cascading failure.
+
+In Erlang or Elixir, the natural boundary is the actor. 
+
+Other languages have actor libraries, such as Akka for Java and
+Scala. 1 These overlay the actor model on a runtime that has no idea what an
+actor is.
+
+In a microservices architecture, a whole instance of the service might be the
+right granularity.
+
+#### Fast replacement
+
+With in-process components like actors, the restart time is measured in
+microseconds. Callers are unlikely to really notice that kind of disruption.
+
+Service instances are trickier. It depends on how much of the “stack” has to
+be started up
+
+Startup time is measured in minutes.
+“Let it crash” is not the right strategy.
+
+#### Supervision
+
+Actor systems use a hierarchical tree of supervisors to manage the restarts.
+
+Supervisors need to keep close track of how often they restart child processes.
+It may be necessary for the supervisor to crash itself if child restarts happen
+too densely.
+
+In a virtualized environment with autoscaling, the
+autoscaler decides whether and where to launch a replacement. They will
+always restart the crashed instance, even if it is just going to crash again
+immediately.
+
+#### Reintegration
+
+The final element of a “let it crash” strategy is reintegration. the instance should
+be reintegrated when health checks from the load balancer begin to pass.
+
+### Handshaking
+
+Handshaking refers to signaling between devices that regulate communication
+between them.
+
+Handshaking is
+ubiquitous in low-level communications protocols but is almost nonexistent
+at the application level.
+
+HTTP provides a response code of “503 Service Unavailable,”. 
+
+the
+server should have a way to reject incoming work.
+
+When there are several services, each can provide a “health check” query for
+use by load balancers. The load balancer would then check the health of the
+server before directing a request to that instance. This provides good hand-
+shaking at a relatively small expense to the service.
+
+Circuit Breaker is a stopgap you can use when calling services that cannot
+handshake.
+
+### Test Harnesses
+
+
+
 
