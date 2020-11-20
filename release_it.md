@@ -561,6 +561,72 @@ handshake.
 
 ### Test Harnesses
 
+Integration testing presents problems of its own, however. What version should
+we test against?
 
+it’s vital to test the local system’s
+behavior when the remote system goes wonky.
+
+there will be behaviors that
+integration testing does not verify.
+
+you can create test harnesses to emulate the remote system on
+the other end of each integration point.
+
+A test harness runs as a
+separate server, so it’s not obliged to conform to any interface. It can provoke network
+errors, protocol errors, or application-level errors.
+
+> I think Wiremock could be a test harness?
+
+### Decoupling Middleware
+
+Often described as “plumbing”
+
+Any kind of synchronous call-and-response or request/reply method forces the
+calling system to stop what it’s doing and wait.
+
+Less tightly coupled forms of middleware allow the calling and receiving sys-
+tems to process messages in different places and at different times. any queue-based or publish/subscribe messaging
+systems fall into this category
+
+Message-oriented middleware decouples the endpoints in both space and
+time.
+
+Designing asynchronous processes is inherently harder.
+
+### Shed load
+
+No matter how strong your load balancers or how
+fast you can scale, the world can always make more load than you can handle.
+
+Services should model TCP’s approach. When load gets too high, start to
+refuse new requests for work. This is related to Fail Fast.
+
+When requests take longer than the SLA,
+it’s time to shed some load.
+
+### Create back pressure
+
+The mechanisms
+change but the idea is still to slow the producer down until the consumer
+can catch up.
+
+The Back Pressure pattern works best with
+asynchronous calls and programming.
+
+back pressure works best within a
+system boundary.
+
+When Back Pressure kicks in, monitoring needs to know about it.
+
+### Governor
+
+We should use automation for things
+humans are bad at: repetitive tasks and fast response. We should use humans
+for what automation is bad at: perceiving the whole situation at a higher level.
+
+The whole point of a governor is to slow things down enough for humans to
+get involved.
 
 
