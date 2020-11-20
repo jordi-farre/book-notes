@@ -629,4 +629,42 @@ for what automation is bad at: perceiving the whole situation at a higher level.
 The whole point of a governor is to slow things down enough for humans to
 get involved.
 
+## Case Study: Phenomenal Cosmic Powers, Itty-Bitty Living Space
+
+a Calabrian doctor named Aloysius Lilius invented a new
+calendar to fix a bug in the widely used Julian calendar. became known
+as the Gregorian calendar rather than the Lilian calendar.
+
+Each industry has its own internal almanac.
+
+For retailers, the year begins and ends with the euphemistically named “holiday
+season.
+
+Shopper panic sets in,
+resulting in a collective phenomenon known as Black Friday. Retailers
+encourage and reinforce this by changing their assortment, increasing stocks
+in stores, and advertising wondrous things.
+
+This is the real load test, the only one that matters.
+
+### Baby's first christmas
+
+My client had launched a new online store in the summer.
+
+for all the problems we experienced following the launch, we approached
+the holiday season with cautious optimism.
+
+Our optimism was rooted in several factors. First, we had nearly doubled the
+number of servers in production. Second, we had hard data showing that the
+site was stable at current loads.
+
+we had more visibility and control over the online store internals than any other system on which
+I’ve worked.
+
+Our local team was far too small to be on-site twenty-four hours a
+day all the time, but we worked out a way to do it for the limited span of the
+Thanksgiving weekend.
+
+
+
 
