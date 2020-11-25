@@ -666,5 +666,130 @@ day all the time, but we worked out a way to do it for the limited span of the
 Thanksgiving weekend.
 
 
+### Taking the pulse
+
+During the run-up to the launch, I was part of load testing this new site.
+
+To get more information out of the load test, I had started off using the
+application server’s HTML administration GUI to check vitals like latency,
+free heap memory, active request-handling threads, and active sessions.
+
+> Monitoring
+
+Monitoring technology provides a
+great safety net, pinpointing problems when they occur, but nothing beats
+the pattern-matching power of the human brain.
+
+### Thanksgiving day
+
+The session count in the
+early morning already rivaled peak time of the busiest day in a normal week.
+
+By noon, customers had placed as many orders as in a typical week.
+
+Page
+latency, our summary indicator of response time and overall site performance,
+was clearly stressed but still nominal.
+
+By midnight, we had taken as many orders
+as in the entire month of October—and the site held up. It passed the first
+killer load test.
+
+### Black friday
+
+Orders were trending even higher than the day before.
+Session counts were up, but page latency was still down around 250 millisec-
+onds, right where we knew it should be.
+
+Of course, I wouldn’t be telling this story if things didn’t go horribly wrong.
+
+SiteScope
+simulates real customers, as shown in the
+figure. When SiteScope goes red, we know
+that customers aren’t able to shop and we’re
+losing revenue.
+
+“All DRPs red” meant the site was down, losing orders at a
+rate of about a million dollars an hour. “Rolling restart” meant they were
+shutting down and restarting the application servers as fast as possible.
+
+### Vital signs
+
+- Session counts were very high, higher than the day before.
+- Application server page latency (response time) was high.
+- Web, application, and database CPU usage were low—really low.
+- Request-handling threads were almost all busy.
+
+Response time is always a lagging indicator. You can only
+measure the response time on requests that are done.
+
+Requests that didn’t complete never got averaged in.
+
+### Diagnostic tests
+
+The waiting threads were all blocked on a resource pool,
+one that had no timeout. If the back end stopped responding, then the threads
+making the calls would never return, and the ones that were blocked would
+never get their chance to make their calls.
+
+Attention swung to the order management system. Thread dumps on that
+system revealed that some of its 450 threads were occupied making calls to
+an external integration point
+
+### Call in a specialist
+
+He explained that of the four servers that
+normally handle scheduling, two were down for maintenance over the holiday
+weekend and one of the others was malfunctioning for reasons unknown.
+
+That left us with a huge imbalance in the sizes of the systems, as shown in
+the following figure. The sole scheduling server that remained could handle
+up to twenty-five concurrent requests before it started to slow down and hang.
+
+our business sponsor gravely informed us that marketing
+had prepared a new insert that hit newspapers Friday morning. The ad offered
+free home delivery for all online orders placed before Monday.
+
+### Compare treatment options
+
+It quickly became clear that the only answer was to stop
+making so many requests to check schedule availability.
+
+We saw a glimmer of hope when we looked at the code for the store. it had a separate connection pool just for scheduling
+requests. it had a component just for those connec-
+tions, we could use that component as our throttle.
+
+### Does the Condition Respond to Treatment?
+
+I used the script to set max for that resource pool (on just
+one DRP) to zero, and I set checkoutBlockTime to zero. 
+
+I used another script, one that could invoke methods on the component, to
+call its stopService() and startService() methods. Voilà! That DRP started handling
+requests again!
+
+The ability to restart components, instead of entire servers, is a key concept
+of recovery-oriented computing.
+
+Recovery-Oriented computing
+
+- Failures are inevitable, in both hardware and software.
+- A priori prediction of all failure modes is not possible.
+- Human action is a major source of system failures.
+
+Their investigations aim to improve
+survivability in the face of failures
+
+Dynamically reconfiguring and restarting just the connection pool took less
+than five minutes
+
+### Winding down
+
+I wrote a new script that would do all the actions needed to reset that connec-
+tion pool’s maximum.
+
+an engineer in the operations center
+or in the “command post” (that is, the conference room) at the client’s site
+could reset the maximum connections to whatever it needed to be.
 
 
